@@ -7,8 +7,8 @@ const changeModalState = (state) => {
           windowHeight = document.querySelectorAll('#height'),
           windowType = document.querySelectorAll('#view_type'),
           windowProfile = document.querySelectorAll('.checkbox');
-
-
+           
+        
           checkNumInput('#width');
           checkNumInput('#height');
 
@@ -37,8 +37,10 @@ const changeModalState = (state) => {
                                 break;
 
                         }
+
                         console.log(state);
                     });
+                    
                 });
            }
            bindActionElems('click', windowForm, 'form');
@@ -46,6 +48,7 @@ const changeModalState = (state) => {
            bindActionElems('input', windowWidth, 'width');
            bindActionElems('change', windowType, 'type');
            bindActionElems('change', windowProfile, 'profile');
+           
       
 
 };

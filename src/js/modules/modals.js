@@ -1,4 +1,4 @@
-const modals = () => {
+const modals = (state) => {
     function bindModal(triggerSelector, modalSelector, closeSelector, closeClickOverlay = true) {
         const trigger = document.querySelectorAll(triggerSelector),
               modal = document.querySelector(modalSelector),
@@ -10,17 +10,40 @@ const modals = () => {
                         if (e.target) {
                             e.preventDefault();
                         }
+
+                        
+
+                        if (e.target.classList.contains('popup_calc_button')) {
+                           if (!state.form && !state.width && !state.height) {
+                              document.querySelector('.popup_calc_button').setAttribute('disabled', true);
+                              document.querySelector('.popup_calc_button').removeAttribute('disabled');
+                              return;
+                            }                           
+
+                        } 
+                          
+                        
+
                         windows.forEach(item => {
                             item.style.display = 'none';
                           });
                           
                         modal.style.display = 'block';
                         document.body.style.overflow = 'hidden';
+                         
 
                     });
               });
 
-             
+              function openModal() {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+              }
+
+             function closeModal() {
+              modal.style.display = 'none';
+              document.body.style.overflow = '';
+             }
 
               close.addEventListener('click', () => {
                 windows.forEach(item => {
