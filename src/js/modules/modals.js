@@ -12,8 +12,8 @@ const modals = (state) => {
                         }
 
                         
-
-                        if (e.target.classList.contains('popup_calc_button')) {
+                        // валидация формы
+                        if (e.target.classList.contains('popup_calc_button')) {  
                            if (!state.form && !state.width && !state.height) {
                               document.querySelector('.popup_calc_button').setAttribute('disabled', true);
                               document.querySelector('.popup_calc_button').removeAttribute('disabled');
@@ -21,6 +21,15 @@ const modals = (state) => {
                             }                           
 
                         } 
+                        // валидация формы второго окна 
+                         if (e.target.classList.contains('popup_calc_profile_button')) {  
+                          if (!state.type || !state.profile) {
+                             document.querySelector('.popup_calc_profile_button').setAttribute('disabled', true);
+                             document.querySelector('.popup_calc_profile_button').removeAttribute('disabled');
+                             return;
+                           }                           
+
+                       }  
                           
                         
 
