@@ -18213,7 +18213,8 @@ var modals = function modals(state) {
     var trigger = document.querySelectorAll(triggerSelector),
         modal = document.querySelector(modalSelector),
         close = document.querySelector(closeSelector),
-        windows = document.querySelectorAll('[data-modal]');
+        windows = document.querySelectorAll('[data-modal]'),
+        scroll = calcScroll();
     trigger.forEach(function (item) {
       item.addEventListener('click', function (e) {
         if (e.target) {
@@ -18243,6 +18244,7 @@ var modals = function modals(state) {
         });
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
+        document.body.style.marginRight = "".concat(scroll, "px");
       });
     });
     close.addEventListener('click', function () {
@@ -18251,6 +18253,7 @@ var modals = function modals(state) {
       });
       modal.style.display = 'none';
       document.body.style.overflow = '';
+      document.body.style.marginRight = "0px";
     });
     modal.addEventListener('click', function (e) {
       if (e.target === modal && closeClickOverlay) {
@@ -18259,15 +18262,35 @@ var modals = function modals(state) {
         });
         modal.style.display = 'none';
         document.body.style.overflow = '';
+        document.body.style.marginRight = "0px";
       }
     });
-  }
+  } // таймер которой отвечает за появления всплывающекго модального окна
+
 
   function showModalByTime(selector, time) {
     setTimeout(function () {
       document.querySelectorAll(selector)[1].style.display = 'block';
       document.body.style.overflow = "hidden";
     }, time);
+  } // функция которая отвечает за вычисление размера прокрутки
+
+
+  function calcScroll() {
+    var div = document.createElement('div');
+    div.style.width = '50px';
+    div.style.height = '50px';
+    div.style.overflowY = 'scroll'; // скрывает скролл
+
+    div.style.visibility = 'hidden'; // скрывает элемент
+
+    document.body.appendChild(div); // вычисляем размер прокрутки
+    // от полной ширины, вычитаем (div.clientWidth)- сюда включаются педенги и самый главный контент(и сюда, 
+    // не включается прокрутка), и получаем саму прокрутку 
+
+    var scrollWidth = div.offsetWidth - div.clientWidth;
+    div.remove();
+    return scrollWidth;
   }
 
   bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
