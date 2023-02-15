@@ -44,15 +44,7 @@ const modals = (state) => {
                     });
               });
 
-              function openModal() {
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-              }
-
-             function closeModal() {
-              modal.style.display = 'none';
-              document.body.style.overflow = '';
-             }
+              
 
               close.addEventListener('click', () => {
                 windows.forEach(item => {
@@ -78,14 +70,12 @@ const modals = (state) => {
 
     }
 
-    function showModalBiTime(selector, time) {
-        setTimeout(() => {
-            document.querySelector(selector).style.display ='block';
-            document.body.style.overflow = 'hidden';
-        }, time);
-           
-
-    }
+    function showModalByTime(selector, time) {
+      setTimeout(function() {
+          document.querySelectorAll(selector)[1].style.display = 'block';
+          document.body.style.overflow = "hidden";
+      }, time);
+  }
 
     bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
     bindModal('.phone_link', '.popup', '.popup .popup_close');
@@ -93,7 +83,7 @@ const modals = (state) => {
     bindModal('.popup_calc_button', '.popup_calc_profile', '.popup_calc_profile_close', false);
     bindModal('.popup_calc_profile_button', '.popup_calc_end', '.popup_calc_end_close', false);
 
-    showModalBiTime('.popup', 60000);
+    showModalByTime('.popup', 60000);
     
 
 };

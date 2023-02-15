@@ -56,9 +56,12 @@ const forms = (state) => {
                         clearInputs();
                         setTimeout(() => {
                             statusMessange.remove();
-                        }, 3000);
+                        }, 3000);  
+                        
                     });
 
+                    
+                    
 
 
 
